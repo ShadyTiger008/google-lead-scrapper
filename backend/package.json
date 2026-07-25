@@ -1,0 +1,20 @@
+{
+  "name": "google-lead-scrapper",
+  "version": "1.0.0",
+  "description": "Local Google Maps lead scraper CLI tool",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "scrape": "node src/index.js",
+    "server": "node src/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.1.2",
+    "commander": "^12.1.0",
+    "cors": "^2.8.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "playwright": "^1.45.1"
+  }
+}
