@@ -26,6 +26,9 @@ app.use(cors({
     // Allow any *.onrender.com subdomain (covers all Render deployments)
     if (origin.endsWith('.onrender.com')) return callback(null, true);
 
+    // Allow any *.vercel.app subdomain (covers all Vercel deployments + previews)
+    if (origin.endsWith('.vercel.app')) return callback(null, true);
+
     // Allow localhost variants for local development
     if (allowedOrigins.includes(origin)) return callback(null, true);
 
