@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { API_BASE_URL, API_ENDPOINTS } from "@/config";
 
 const SUGGESTED_CATEGORIES = [
   "dentist",
@@ -13,8 +14,6 @@ const SUGGESTED_CATEGORIES = [
   "gym",
   "bakery"
 ];
-
-const API_BASE_URL = "http://localhost:5050";
 
 export default function Home() {
   // Leads List
@@ -74,7 +73,7 @@ export default function Home() {
   // Fetch leads from database
   const fetchLeads = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/leads`);
+      const res = await fetch(API_ENDPOINTS.leads);
       if (res.ok) {
         const data = await res.json();
         setLeads(data);
@@ -89,7 +88,7 @@ export default function Home() {
   // Poll for background scraping status
   const checkJobStatus = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/api/scrape/status`);
+      const res = await fetch(API_ENDPOINTS.scrapeStatus);
       if (res.ok) {
         const currentJob = await res.json();
         setJob(currentJob);
@@ -141,7 +140,7 @@ export default function Home() {
     }
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/scrape`, {
+      const res = await fetch(API_ENDPOINTS.scrape, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -170,7 +169,7 @@ export default function Home() {
     if (filterCategory) params.append("category", filterCategory);
     if (filterLocation) params.append("location", filterLocation);
 
-    window.open(`${API_BASE_URL}/api/export?${params.toString()}`);
+    window.open(`${API_ENDPOINTS.export}?${params.toString()}`);
   };
 
   // Compute stats metrics
