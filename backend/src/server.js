@@ -11,8 +11,26 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 
 // Enable CORS for frontend client
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  // Add your deployed frontend URL here if needed, e.g.:
+  // 'https://your-frontend.vercel.app',
+];
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, Postman, server-to-server)
+    if (!origin) return callback(null, true);
+
+    // Allow any *.onrender.com subdomain (covers all Render deployments)
+    if (origin.endsWith('.onrender.com')) return callback(null, true);
+
+    // Allow localhost variants for local development
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+
+    callback(new Error(`CORS: origin '${origin}' is not allowed`));
+  },
   methods: ['GET', 'POST'],
   credentials: true
 }));
