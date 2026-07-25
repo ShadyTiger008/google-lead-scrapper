@@ -6,7 +6,9 @@
  *   variable to the deployed backend URL (e.g. https://your-api.onrender.com).
  */
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5050";
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://google-lead-scrapper.onrender.com"; // Production (Render)
+  // "http://localhost:5050";                  // Local development
 
 /**
  * Named API endpoint helpers.
